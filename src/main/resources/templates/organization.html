@@ -1,0 +1,91 @@
+<html xmlns="http://thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="../static/css/popul.css" th:href="@{/css/popul.css}" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" th:scr="@{/js/main.js}" scr="../static/js/main.js"></script>
+</head>
+<body>
+<div class="alert alert-info" role="alert">
+   <center><h3>----------------------------------------------ORGANIZATION----------------------------------------------------------
+    </h3></center>
+</div>
+<form method="post" action="MainMenu">
+    <input type="submit" class="btn btn-primary"value='Exit in Menu'>
+</form>
+<div class='btn btn-primary open_popup' role="alert" data-value="9" style="left: 50%">
+    <p>Insert new RECORDS</p>
+</div>
+<div class="bg-wrapper"></div>
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            <table class=" table table-hover">
+                <thead>
+                <tr>
+                    <th>Organization_ID</th>
+                    <th>Name Organization</th>
+                    <th>Phone</th>
+                    <th>E_mail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${organizationList}">
+                    <td th:text="${item.organization_id}"></td>
+                    <td th:text="${item.name_of_organization}"></td>
+                    <td th:text="${item.phone}"></td>
+                    <td th:text="${item.e_mail}"></td>
+                    <td><p th:organization-ID="${item.organization_id}" class='btn btn-primary open_popup' data-value='7'>Edit</p></td>
+                    <td><p th:organization-ID="${item.organization_id}" class='btn btn-primary open_popup' data-value="8">Delete</p></td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--Обновление-->
+<div class="popup-block popup_7">
+    <div class="popup-container">
+        <span class="close-popup">x</span>
+        <h4 style="text-align: center;">Обновление данных:</h4>
+        <form method="post" action="updateOrganization">
+            <input type="hidden" name="hiden_Org" value="" class="hiden-Org"/>
+            <p>Название организации:<br><input pattern="^[A-Za-zА-Яа-яЁё]+$" type="text" required name="name_of_organization"/></p>
+            <p>Телефон:  <input type="tel" name="phone" pattern="+[0-9]{2}[0-9]{2}[0-9]{3}" required value="+380"></p>
+            <p>E_mail: <input type="email" name="e_mail" required ></p>
+            <input type="submit" value="Update" class="okno-button"
+                   style="margin: 0 50px; width: 90px;">
+        </form>
+    </div>
+</div>
+<!--Delete-->
+<div class="popup-block popup_8">
+    <div class="popup-container">
+        <span class="close-popup">x</span>
+        <h4 style="text-align: center;">Подтвертиде удаление записи!!!</h4>
+        <form method="post" action="deleteOrganization">
+            <input type="hidden" name="hiden_Org" value="" class="hiden-Org"/>
+           <center> <input type="submit" value="Delete" required class="okno-button"
+                   style=" margin: 0 100px; width: 80px;">
+           </center>
+        </form>
+    </div>
+</div>
+<!--Add data-->
+<div class="popup-block popup_9">
+    <div class="popup-container">
+        <span class="close-popup">x</span>
+        <h4 style="text-align: center;">Добавление новых данных:</h4>
+        <form method="post" action="insertOrg">
+            <p>Название организации:<br><input pattern="^[A-Za-zА-Яа-яЁё\s\.]+$" type="text" required name="name_of_organization"/></p>
+            <p>Телефон: <br> <input type="tel" name="phone" pattern="+[0-9]{2}[0-9]{2}[0-9]{3}" required value="+380"></p>
+            <p>E_mail: <br><input type="email" name="e_mail" required ></p>
+            <input type="submit" value="Insert" class="okno-button1">
+        </form>
+    </div>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>

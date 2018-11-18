@@ -1,0 +1,107 @@
+<html xmlns="http://thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="../static/css/popul.css" th:href="@{/css/popul.css}" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" th:scr="@{/js/main.js}" scr="../static/js/main.js"></script>
+</head>
+<body>
+<div  class="alert alert-info" role="alert">
+  <center><h3>---CD---
+   </h3></center>
+</div>
+    <form method="post" action="MainMenu">
+        <input type="submit" class="btn btn-primary"value='Exit in Menu'>
+    </form>
+<div  class='btn btn-primary open_popup' role="alert" data-value="3" style="left: 50%">
+    <p>Insert new RECORDS</p>
+</div>
+<div class="bg-wrapper"></div>
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            <table class=" table table-hover">
+                <thead>
+                <tr>
+                    <th>CD_ID</th>
+                    <th>Name Album</th>
+                    <th>Name Genre</th>
+                    <th>Name Artist</th>
+                    <th>Name Organzation</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${cdList}">
+                    <td th:text="${item.CD_ID}"></td>
+                    <td th:text="${item.Album}"></td>
+                    <td th:text="${item.Genre}"></td>
+                    <td th:text="${item.artist.Name}"></td>
+                    <td th:text="${item.organization.Name_of_organization}"></td>
+                    <td><p th:cd-ID="${item.CD_ID}" class='btn btn-primary open_popup' data-value='1'>Edit</p></td>
+                    <td><p th:cd-ID="${item.CD_ID}" class='btn btn-primary open_popup' data-value="2">Delete</p></td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--CD window-->
+<div class="popup-block popup_1">
+    <div class="popup-container">
+        <span class="close-popup">x</span>
+        <h4 style="text-align: center;">Обновление данных:</h4>
+        <form method="post" action="updateCD">
+            <input type="hidden" name="hiden_CD" value="" class="hiden-CD"/>
+                <p>Название альбома:<input  pattern="^[A-Za-zА-Яа-яЁё]+$" type="text" required  name="album" /></p>
+            <p>Название жанра:<input  pattern="^[A-Za-zА-Яа-яЁё]+$" type="text" required  name="genre" /></p>
+            <p>Артист:<br><select name="artistID">
+                <option  th:each="item:${artistList}" th:value="${item.Artist_ID}">
+                    <td th:text="${item.Name}"></td>
+                </option>
+            </select> </p>
+            <p>Компания производитель:<br><select name="orgID">
+                <option th:each="item:${organizationList}" th:value="${item.organization_id}"><td th:text="${item.Name_of_organization}"></td></option>
+            </select> </p>
+            <center><input type="submit" value="Update" class="okno-button"
+                style="margin: 0 50px; width: 90px;">
+            </center>
+        </form>
+    </div>
+</div>
+<!--Delete-->
+<div class="popup-block popup_2">
+    <div class="popup-container">
+        <span class="close-popup">x</span>
+        <h4 style="text-align: center;">Подтвердите удаление записи!!!</h4>
+        <form method="post" action="deleteCD">
+            <input type="hidden" name="hiden_CD" value="" class="hiden-CD"/>
+            <center>  <input type="submit" pattern="[A-Za-zА-Яа-яЁё]" value="Delete" required class="okno-button"
+                   style="margin: 0 100px; width: 80px;"></center>
+        </form>
+    </div>
+</div>
+<div class="popup-block popup_3">
+    <div class="popup-container">
+        <span class="close-popup">x</span>
+        <h4 style="text-align: center;">Добавление новых данных:</h4>
+        <form method="post" action="insertCD">
+            <p>Название альбома:<input  pattern="^[A-Za-zА-Яа-яЁё]+$" type="text" required  name="album" /></p>
+            <p>Название жанра:<input  pattern="^[A-Za-zА-Яа-яЁё]+$" type="text" required  name="genre" /></p>
+            <p>Артист:<br><select name="artistID">
+                <option  th:each="item:${artistList}" th:value="${item.Artist_ID}">
+                    <td th:text="${item.Name}"></td>
+                </option>
+            </select> </p>
+            <p>Компания производитель:<select name="orgID">
+                <option th:each="item:${organizationList}" th:value="${item.organization_id}"><td th:text="${item.Name_of_organization}"></td></option>
+            </select> </p>
+            <input type="submit" value="Insert" class="okno-button1">
+        </form>
+    </div>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
