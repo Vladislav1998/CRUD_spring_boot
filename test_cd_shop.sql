@@ -108,9 +108,7 @@ INSERT INTO `organization` (`organization_ID`, `name_of_organization`, `phone`, 
 (10, 'iAhar', '+380962359243', 'iahar@mail.com'),
 (11, 'Music room', '+380968574287', 'musicroom@mail.com');
 
---
--- Индексы сохранённых таблиц
---
+
 
 --
 -- Индексы таблицы `Artist`
